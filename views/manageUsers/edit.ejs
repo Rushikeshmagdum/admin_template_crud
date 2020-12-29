@@ -42,35 +42,37 @@
                                             </div>
                                         </div>
                                         <div class="col-12 mt-4">
-                                            <form method="POST" action="/manageUsers/create">
+                                            <form method="POST" action="/manageUsers/edit">
                                                 <div class="form-row">
                                                     <div class="form-group col-6">
                                                         <label>First Name</label>
-                                                        <input class="form-control" name="" id="">
+                                                        <input class="form-control" name="firstName" id="firstName" value="<%-user.firstName%>" required>
+                                                        <input type="hidden" class="form-control" name="_id" id="_id" value="<%-user._id%>" required>
+                                    
+                                        
                                                     </div>
                                                     <div class="form-group col-6">
                                                         <label>Last Name</label>
-                                                        <input class="form-control" name="" id="">
-                                                    </div>
+                                                        <input class="form-control" name="lastName" id="lastName "  value="<%-user.lastName%>" required>                                                    </div>
                                                 </div>
                                                 <div class="form-row">
                                                     <div class="form-group col-6">
                                                         <label>Contact</label>
-                                                        <input class="form-control" name="" id="">
+                                                        <input class="form-control" name="contact" id="contact"  value="<%-user.contact%>" required>
                                                     </div>
                                                     <div class="form-group col-6">
                                                         <label>Email</label>
-                                                        <input class="form-control" name="" id="">
+                                                        <input class="form-control" name="email" id="email"  value="<%-user.email%>" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
                                                     <div class="form-group col-6">
                                                         <label>Password</label>
-                                                        <input class="form-control" name="" id="">
+                                                        <input class="form-control" name="password" id="password"  value="<%-user.password%>" required>
                                                     </div>
                                                     <div class="form-group col-6">
                                                         <label>Confirm Password</label>
-                                                        <input class="form-control" name="" id="">
+                                                        <input class="form-control" name="confirmPassword" id="confirmPassword"  value="<%-user.password%>" required>
                                                     </div>
                                                 </div>
                                                 <div class="row">

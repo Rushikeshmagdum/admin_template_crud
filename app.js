@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const mongoose= require('mongoose');
+const session = require('express-session');
 
 var indexRouter = require('./routes/index');
 
@@ -18,8 +20,32 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  secret: 'aljdhsiudhaosidhuaiegiadbncagi97sdgioasdfoiagef79dtgfoiabfiuadgt',
+  resave: false,
+  saveUninitialized: true,
+  rolling: true,
+  cookie: { secure: true, maxAge: 3600000 }
+}));
+
+app.use((req, res, next)=>{
+  console.log("*******************8");
+  res.locals.userName = req.session.userName;
+  res.locals.email = req.session.email;
+  next();
+});
+
+//Database connection goes here
+mongoose.connect('mongodb://127.0.0.1:27017/test',{ useNewUrlParser: true, useUnifiedTopology: true},(err)=>{
+  if(err)
+    throw err;
+  else
+    console.log("Connected Sucessfully.....");
+})
 app.use('/', indexRouter);
 app.use('/manageUsers', require('./routes/manageUsers'));
+app.use('/', require('./routes/auth'));
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

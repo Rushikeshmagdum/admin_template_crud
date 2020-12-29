@@ -54,14 +54,19 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
+                                                    <%for(let i=0; i<users.length; i++){%>
+                                                        <tr>
+                                                            <td><%- i+1 %></td>
+                                                            <td><%- users[i].firstName%></td>
+                                                            <td><%- users[i].lastName%></td>
+                                                            <td><%- users[i].email%></td>
+                                                            <td><%- users[i].contact%></td>
+                                                            <td>
+                                                                <a class="btn btn-warning text-white" href="/manageUsers/edit/<%-users[i]._id%>"><i class="fa fa-edit"></i></a>
+                                                                <a class="btn btn-danger text-white" href="/manageUsers/delete/<%-users[i]._id%>"><i class="fa fa-trash"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                        <%}%>
                                                 </tbody>
                                             </table>
                                         </div>
