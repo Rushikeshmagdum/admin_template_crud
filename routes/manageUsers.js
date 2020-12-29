@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const UserModel = require("../model/UserModel")
-
+const auth = require('../helpers/auth');
 //Route To Render Manage Users
-router.get('/',async (req, res)=>{
+router.get('/', auth, async (req, res)=>{
     try{
         console.log(req.session.userName, req.session.email);
         let users= await UserModel.find();
@@ -18,7 +18,7 @@ router.get('/',async (req, res)=>{
 });
 
 //Route To Render Create User Page
-router.get('/create', (req, res)=>{
+router.get('/create', auth, (req, res)=>{
     res.render('manageUsers/create');
 });
 //Route to create new user
@@ -31,7 +31,7 @@ router.get('/create', (req, res)=>{
 //     //         res.redirect('/manageUsers');
 //     // });
 // });
-router.post('/create', async(req, res)=>{
+router.post('/create', auth, async(req, res)=>{
     try {
         await new UserModel(req.body).save();
         res.redirect('/manageUsers');
@@ -46,7 +46,7 @@ router.post('/create', async(req, res)=>{
 })
 
 //Route To Render Edit User Page
-router.get('/edit/:userId',async (req, res)=>{
+router.get('/edit/:userId', auth, async (req, res)=>{
     try{
         let userData =await UserModel.findOne({_id:req.params.userId});
         return res.render('manageUsers/edit',{user:userData});
@@ -60,7 +60,7 @@ router.get('/edit/:userId',async (req, res)=>{
     }
 });
 //Route To Edit User Details
-router.post('/edit', async(req, res)=>{
+router.post('/edit',auth, async(req, res)=>{
     try {
       await UserModel.findOneAndUpdate({_id: req.body._id}, {$set: req.body});
       res.redirect('/manageUsers');  
@@ -74,7 +74,7 @@ router.post('/edit', async(req, res)=>{
     }
 });
 //Route To Delete User
-router.get('/delete/:userId', async(req, res)=>{
+router.get('/delete/:userId', auth, async(req, res)=>{
     try {
         await UserModel.findOneAndDelete({_id: req.params.userId});
         res.redirect('/manageUsers');

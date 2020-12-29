@@ -13,7 +13,6 @@ router.post('/login', async(req, res)=>{
         //If User Exist Then Proceed Further Otherwise Send User Does Not Exist Error
         if(user){
             if(user.password === req.body.password){
-                console.log(user);
                 req.session.userName = user.firstName + " " + user.lastName;
                 req.session.email = user.email;
                 req.session.userId = user._id;

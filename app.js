@@ -25,11 +25,11 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   rolling: true,
-  cookie: { secure: true, maxAge: 3600000 }
+  resave:  true,
+  // cookie: { secure: true, maxAge: 3600000 }
 }));
 
 app.use((req, res, next)=>{
-  console.log("*******************8");
   res.locals.userName = req.session.userName;
   res.locals.email = req.session.email;
   next();
